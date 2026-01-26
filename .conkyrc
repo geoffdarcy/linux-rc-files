@@ -84,20 +84,21 @@ ${if_existing /proc/net/route ens18}\
 ${template1 IP}                                                ${template3}${addr ens18}
 ${template1 Download}      ${template2}${downspeed ens18}      ${template3}${downspeedgraph ens18}
 ${template1 Upload}        ${template2}${upspeed ens18}        ${template3}${upspeedgraph ens18}
-${template1 Total Down/Up}                                     ${template3}${totaldown ens18}ż / {totalup ens18}ż
+${template1 Total Down/Up}                                     ${template3}${totaldown ens18} Down / ${totalup ens18} Up
 ${endif}
 ${if_existing /proc/net/route ens19}\
 ${template1 IP}                                                ${template3}${addr ens19}
 ${template1 Download}      ${template2}${downspeed ens19}      ${template3}${downspeedgraph ens19}
 ${template1 Upload}        ${template2}${upspeed ens19}        ${template3}${upspeedgraph ens19}
-${template1 Total Down/Up}                                     ${template3}${totaldown ens19}ż / {totalup ens19}ż
+${template1 Total Down/Up}                                     ${template3}${totaldown ens19} Down / ${totalup ens19} Up
 ${endif}
 ${if_existing /proc/net/dev tailscale0}\
 ${template1 Tailscale\ IP}                                     ${template3}${addr tailscale0}
 ${template1 Download}      ${template2}${downspeed tailscale0} ${template3}${downspeedgraph tailscale0}
 ${template1 Upload}        ${template2}${upspeed tailscale0}   ${template3}${upspeedgraph tailscale0}
-${template1 Total Down/Up}                                     ${template3}${totaldown tailscale0}ż / ${totalup tailscale0}ż
+${template1 Total Down/Up}                                     ${template3}${totaldown tailscale0} Down / ${totalup tailscale0} Up
 ${endif}\
+
  
  
 ]];
