@@ -1,6 +1,6 @@
 # linux-rc-files
 
-`.conkyrc`
+```.conkyrc
 
 Resource control file for Conky system monitor
 
