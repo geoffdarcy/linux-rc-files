@@ -2,10 +2,15 @@
 
 ```.conkyrc```
 
-Resource control file for Conky system monitor
+Resource Control file for Conky system monitor
 
 
 
 ```.jwmrc```
 
-Resource control file for JWM window manager
+Resource Control file for JWM window manager
+
+
+```.vimrc```
+
+Resrouce Control file for vim text editor
