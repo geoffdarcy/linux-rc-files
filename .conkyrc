@@ -53,17 +53,10 @@ conky.text = [[
 # 
 ${template0 System}
 ${template1 Hostname}                                          ${template3}${nodename}
+${template1 External\ IP}                                                            ${template3}${exec wget -q -O- http://ipecho.net/plain; echo}
 ${template1 ${sysname}}                                        ${template3}${kernel}-${machine}
 ${template1 Uptime}                                            ${template3}${uptime_short}
 ${template1 CPU}                                               ${template3}${freq_g}GHz
- 
-${template0 Processors}
-${template1 Load}           ${template2}${loadavg 1}           ${template3}${loadgraph}
-${template1 Core\ 1}        ${template2}${cpu cpu1}%           ${template3}${cpubar cpu1}
-${template1 Core\ 2}        ${template2}${cpu cpu2}%           ${template3}${cpubar cpu2}
-#${template1 Core\ 3}       ${template2}${cpu cpu3}%           ${template3}${cpubar cpu3}
-#${template1 Core\ 4}       ${template2}${cpu cpu4}%           ${template3}${cpubar cpu4}
-${template1 Top}            ${template2}${top name 1}          ${template3}${top cpu 1}
  
 ${template0 Memory}
 ${template1 Memory}         ${template2}${memperc}% used       ${template3}${mem} / ${memmax}
@@ -101,6 +94,11 @@ ${template1 Download}      ${template2}${downspeed tailscale0} ${template3}${dow
 ${template1 Upload}        ${template2}${upspeed tailscale0}   ${template3}${upspeedgraph tailscale0}
 ${template1 Total Down/Up}                                     ${template3}${totaldown tailscale0} Down / ${totalup tailscale0} Up
 ${endif}\
- 
+
+${template0 Processors}
+${template1 Load}           ${template2}${loadavg 1}           ${template3}${loadgraph}
+${template1 Cores}          ${template2}        ${template3}
+${execpi 300 for i in $(seq 1 $(nproc)); do echo "\${template1 Core\ $i} \${template2}\${cpu cpu$i}% \${template3}\${cpubar cpu$i}"; done}
+${template1 Top}            ${template2}${top name 1}          ${template3}${top cpu 1}
  
 ]];
