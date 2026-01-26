@@ -86,13 +86,15 @@ ${template1 IP}            ${template2}ens18                                    
 ${template1 Download}      ${template2}${downspeed ens18}      ${template3}${downspeedgraph ens18}
 ${template1 Upload}        ${template2}${upspeed ens18}        ${template3}${upspeedgraph ens18}
 ${template1 Total Down/Up}                                     ${template3}${totaldown ens18} Down / ${totalup ens18} Up
-${endif}
+
+${endif}\
 ${if_existing /proc/net/route ens19}\
 ${template1 IP}            ${template2}ens19                                               ${template3}${addr ens19}
 ${template1 Download}      ${template2}${downspeed ens19}      ${template3}${downspeedgraph ens19}
 ${template1 Upload}        ${template2}${upspeed ens19}        ${template3}${upspeedgraph ens19}
 ${template1 Total Down/Up}                                     ${template3}${totaldown ens19} Down / ${totalup ens19} Up
-${endif}
+
+${endif}\
 ${if_existing /proc/net/dev tailscale0}\
 ${template1 VPN\ IP}            ${template2}tailscale0   ${template3}${addr tailscale0}
 ${template1 Download}      ${template2}${downspeed tailscale0} ${template3}${downspeedgraph tailscale0}
