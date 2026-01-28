@@ -53,7 +53,6 @@ conky.text = [[
 # 
 ${template0 System}
 ${template1 Hostname}                                          ${template3}${nodename}
-${template1 External\ IP}                                                            ${template3}${exec wget -q -O- http://ipecho.net/plain; echo}
 ${template1 ${sysname}}                                        ${template3}${kernel}-${machine}
 ${template1 Uptime}                                            ${template3}${uptime_short}
 ${template1 CPU}                                               ${template3}${freq_g}GHz
@@ -74,6 +73,7 @@ ${template1 IO\ Write}      ${template2}$diskio_write          ${template3}$disk
 ${template1 Top}            ${template2}${top_io name 1}       ${template3}${top_io io_perc 1}%
 
 ${template0 Networking}
+${template1 IP}            ${template2}External                ${template3}${exec wget -q -O- http://ipecho.net/plain; echo}
 ${if_existing /proc/net/route ens18}\
 ${template1 IP}            ${template2}ens18                                                ${template3}${addr ens18}
 ${template1 Download}      ${template2}${downspeed ens18}      ${template3}${downspeedgraph ens18}
@@ -102,3 +102,4 @@ ${execpi 300 for i in $(seq 1 $(nproc)); do echo "\${template1 Core\ $i} \${temp
 ${template1 Top}            ${template2}${top name 1}          ${template3}${top cpu 1}
  
 ]];
+
