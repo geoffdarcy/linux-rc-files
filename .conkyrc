@@ -13,7 +13,7 @@ conky.config = {
     gap_y = 6,
     
     -- Size
-    minimum_width = 400,
+    minimum_width = 460,
     minimum_height = 128,
     
     -- Display settings
@@ -24,7 +24,7 @@ conky.config = {
     
     -- Text settings
     use_xft = true,
-    font = 'Liberation Mono:size=10',
+    font = 'Liberation Mono:size=11',
     xftalpha = 0.8,
     
     -- Colors
