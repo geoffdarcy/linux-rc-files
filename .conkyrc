@@ -1,105 +1,68 @@
 conky.config = {
-    use_xft = true,
-    xftalpha = 0.8,
-    update_interval = 1.0,
-    total_run_times = 0,
+    -- Window settings
     own_window = true,
+    own_window_type = 'desktop',
     own_window_transparent = true,
-    own_window_argb_visual = true,
-    own_window_type = 'normal',
-    own_window_class = 'conky-semi',
     own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
-    background = false,
-    double_buffer = true,
-    imlib_cache_size = 0,
-    no_buffers = true,
-    uppercase = false,
-    cpu_avg_samples = 2,
-    override_utf8_locale = true,
- 
-    -- placement
+    own_window_argb_visual = true,
+    own_window_argb_value = 0,
+    
+    -- Position (top right corner)
     alignment = 'top_right',
-    gap_x = 10,
-    gap_y = 10,
- 
-    -- default drawing
+    gap_x = 6,
+    gap_y = 6,
+    
+    -- Size
+    minimum_width = 400,
+    minimum_height = 128,
+    
+    -- Display settings
     draw_shades = false,
     draw_outline = false,
     draw_borders = false,
-    draw_graph_borders = true,
-    default_bar_width = 150, default_bar_height = 5,
-    default_graph_width = 150, default_graph_height = 12,
-    default_gauge_width = 20, default_gauge_height = 20,
- 
-    -- colors
-    font = 'Liberation Mono:size=10',
-    default_color = 'EEEEEE',
-    color1 = 'AABBFF',
-    color2 = 'FF993D',
-    color3 = 'AAAAAA',
- 
-    -- layouting
-    template0 = [[${font Liberation Sans:bold:size=11}${color2}\1 ${color3}${hr 2}${font}]],
-    template1 = [[${color1}\1]],
-    template2 = [[${goto 100}${color}]],
-    template3 = [[${goto 180}${color}${alignr}]],
+    draw_graph_borders = false,
     
-};
- 
+    -- Text settings
+    use_xft = true,
+    font = 'Liberation Mono:size=10',
+    xftalpha = 0.8,
+    
+    -- Colors
+    default_color = 'white',
+    default_shade_color = 'black',
+    
+    -- Update settings
+    update_interval = 60.0,
+    total_run_times = 0,
+    
+    -- Performance
+    double_buffer = true,
+    no_buffers = true,
+    cpu_avg_samples = 2,
+    
+    -- Prevent window from moving
+    own_window_class = 'Conky',
+}
+
 conky.text = [[
-#${template0 Info}
-#${template1 Date}                                             ${template3}${color3}${time %a,}${color}${time %e %B %G}
-#${template1 Time}                                             ${template3}${time %T}
-# 
-${template0 System}
-${template1 Hostname}                                          ${template3}${nodename}
-${template1 ${sysname}}                                        ${template3}${kernel}-${machine}
-${template1 Uptime}                                            ${template3}${uptime_short}
-${template1 CPU}                                               ${template3}${freq_g}GHz
- 
-${template0 Memory}
-${template1 Memory}         ${template2}${memperc}% used       ${template3}${mem} / ${memmax}
-                                                               ${template3}${membar}
-${template1 Swap}           ${template2}${swapperc}% used      ${template3}${swap} / ${swapmax}
-                                                               ${template3}${swapbar}
-${template1 Top}            ${template2}${top_mem name 1}      ${template3}${top_mem mem_vsize 1}
- 
-${template0 Filesystem}
-${template1 /}              ${template2}${fs_free /} free      ${template3}${fs_used /} / ${fs_size /}
-#${template1 /home}          ${template2}${fs_free /home} free  ${template3}${fs_used /home} / ${fs_size /home}
-                                                                            ${template3}${fs_bar /}
-${template1 IO\ Read}       ${template2}${diskio_read}         ${template3}${diskiograph_read}
-${template1 IO\ Write}      ${template2}$diskio_write          ${template3}$diskiograph_write
-${template1 Top}            ${template2}${top_io name 1}       ${template3}${top_io io_perc 1}%
-
-${template0 Networking}
-${template1 IP}            ${template2}External                ${template3}${exec wget -q -O- http://ipecho.net/plain; echo}
-${if_existing /proc/net/route ens18}\
-${template1 IP}            ${template2}ens18                                                ${template3}${addr ens18}
-${template1 Download}      ${template2}${downspeed ens18}      ${template3}${downspeedgraph ens18}
-${template1 Upload}        ${template2}${upspeed ens18}        ${template3}${upspeedgraph ens18}
-${template1 Total Down/Up}                                     ${template3}${totaldown ens18} Down / ${totalup ens18} Up
-
+${font Liberation Mono:size=12:bold}Server Information${font}
+${font Liberation Mono:size=11}Hostname:${alignr}${nodename}${font}
+${if_existing /proc/net/dev tailscale0}\
+${font Liberation Mono:size=11}Tailname:${alignr}${exec bash -c "/usr/bin/hostname -A | sed -E 's/^[^ ]+ ([^.]+)\.tail.*/\1/' | xargs; echo"}${font}\
 ${endif}\
-${if_existing /proc/net/route ens19}\
-${template1 IP}            ${template2}ens19                                               ${template3}${addr ens19}
-${template1 Download}      ${template2}${downspeed ens19}      ${template3}${downspeedgraph ens19}
-${template1 Upload}        ${template2}${upspeed ens19}        ${template3}${upspeedgraph ens19}
-${template1 Total Down/Up}                                     ${template3}${totaldown ens19} Down / ${totalup ens19} Up
-
+${font Liberation Mono:size=11}Operating System:${alignr}${exec lsb_release -ds 2>/dev/null || cat /etc/os-release | grep PRETTY_NAME | cut -d'"' -f2}${font}
+${font Liberation Mono:size=11}Kernel:${alignr}${kernel}${font}
+${font Liberation Mono:size=11}Hypervisor:${alignr}${exec systemd-detect-virt 2>/dev/null || echo "Unknown"}${font}
+${font Liberation Mono:size=11}Total Memory:${alignr}${memmax}${font}
+${if_existing /tmp/.ens18IPv4}\
+${font Liberation Mono:size=11}IPv4 External:${alignr}${exec bash -c 'cat /tmp/.ens18IP | cut -f2 | xargs; echo'}${font}\
+${endif}\
+${if_existing /proc/net/route ens18}\
+${font Liberation Mono:size=11}IPv4 Internal:${alignr}${addr ens18}
 ${endif}\
 ${if_existing /proc/net/dev tailscale0}\
-${template1 VPN\ IP}            ${template2}tailscale0   ${template3}${addr tailscale0}
-${template1 Download}      ${template2}${downspeed tailscale0} ${template3}${downspeedgraph tailscale0}
-${template1 Upload}        ${template2}${upspeed tailscale0}   ${template3}${upspeedgraph tailscale0}
-${template1 Total Down/Up}                                     ${template3}${totaldown tailscale0} Down / ${totalup tailscale0} Up
+${font Liberation Mono:size=11}IPv4 Tailscale:${alignr}${addr tailscale0}${font}
 ${endif}\
-
-${template0 Processors}
-${template1 Load}           ${template2}${loadavg 1}           ${template3}${loadgraph}
-${template1 Cores}          ${template2}        ${template3}
-${execpi 300 for i in $(seq 1 $(nproc)); do echo "\${template1 Core\ $i} \${template2}\${cpu cpu$i}% \${template3}\${cpubar cpu$i}"; done}
-${template1 Top}            ${template2}${top name 1}          ${template3}${top cpu 1}
- 
-]];
+${font Liberation Mono:size=11}Uptime:${alignr}${uptime}${font}
+]]
 
