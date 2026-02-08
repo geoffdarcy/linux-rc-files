@@ -58,7 +58,13 @@ ${if_existing /tmp/.ens18IPv4}\
 ${font Liberation Mono:size=11}IPv4 External:${alignr}${exec bash -c 'cat /tmp/.ens18IP | cut -f2 | xargs; echo'}${font}\
 ${endif}\
 ${if_existing /proc/net/route ens18}\
-${font Liberation Mono:size=11}IPv4 Internal:${alignr}${addr ens18}
+${font Liberation Mono:size=11}IPv4 ens18:${alignr}${addr ens18}
+${endif}\
+${if_existing /var/log/MODEM_IP_LOG}\
+${font Liberation Mono:size=11}IPv4 Squid:${alignr}${exec bash -c 'cat /var/log/MODEM_IP_LOG | cut -f2 | xargs; echo'}\
+${endif}\
+${if_existing /proc/net/route ens19}\
+${font Liberation Mono:size=11}IPv4 ens19:${alignr}${addr ens19}
 ${endif}\
 ${if_existing /proc/net/dev tailscale0}\
 ${font Liberation Mono:size=11}IPv4 Tailscale:${alignr}${addr tailscale0}${font}
