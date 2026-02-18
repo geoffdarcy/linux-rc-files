@@ -24,7 +24,7 @@ conky.config = {
     
     -- Text settings
     use_xft = true,
-    font = 'Liberation Mono:size=11',
+    font = 'Liberation Mono:size=10',
     xftalpha = 0.8,
     
     -- Colors
@@ -61,7 +61,7 @@ ${if_existing /proc/net/route ens18}\
 ${font Liberation Mono:size=11}IPv4 ens18:${alignr}${addr ens18}
 ${endif}\
 ${if_existing /var/log/MODEM_IP_LOG}\
-${font Liberation Mono:size=11}IPv4 Squid:${alignr}${exec bash -c 'cat /var/log/MODEM_IP_LOG | cut -f2 | xargs; echo'}\
+${font Liberation Mono:size=11}IPv4 Squid:${alignr}${exec bash -c 'cat /var/log/MODEM_IP_LOG | tail -n1 | cut -f2 | xargs; echo'}\
 ${endif}\
 ${if_existing /proc/net/route ens19}\
 ${font Liberation Mono:size=11}IPv4 ens19:${alignr}${addr ens19}
@@ -71,4 +71,3 @@ ${font Liberation Mono:size=11}IPv4 Tailscale:${alignr}${addr tailscale0}${font}
 ${endif}\
 ${font Liberation Mono:size=11}Uptime:${alignr}${uptime}${font}
 ]]
-
