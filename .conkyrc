@@ -46,6 +46,7 @@ conky.config = {
 
 conky.text = [[
 ${font Liberation Mono:size=12:bold}Server Information${font}
+${hr}
 ${font Liberation Mono:size=11}Hostname:${alignr}${nodename}${font}
 ${if_existing /proc/net/dev tailscale0}\
 ${font Liberation Mono:size=11}Tailname:${alignr}${exec bash -c "/usr/bin/hostname -A | sed -E 's/^[^ ]+ ([^.]+)\.tail.*/\1/' | xargs; echo"}${font}\
@@ -70,4 +71,10 @@ ${if_existing /proc/net/dev tailscale0}\
 ${font Liberation Mono:size=11}IPv4 Tailscale:${alignr}${addr tailscale0}${font}
 ${endif}\
 ${font Liberation Mono:size=11}Uptime:${alignr}${uptime}${font}
+${hr}
+${if_existing /var/run/reboot-required}\
+${font Liberation Mono:size=11}*** REBOOT REQUIRED ***\
+${else}\
+${font Liberation Mono:size=11}System up to date\
+${endif}
 ]]
